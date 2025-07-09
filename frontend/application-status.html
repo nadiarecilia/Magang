@@ -2,53 +2,225 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Status Lamaran | Winnicode</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="job.css" />
-  <link rel="stylesheet" href="application-status.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Status Lamaran Saya</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="style/application-status.css" />
 </head>
 <body>
-  <!-- ======= NAVBAR ======= -->
-  <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-pink" href="index.html">Winni The Pooh</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNavbar">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="find-job.html">Lowongan</a></li>
-          <li class="nav-item"><a class="nav-link active" href="#">Status Lamaran</a></li>
-        </ul>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="/">
+      <img src="assets/logo1.png" alt="Logo Winnicode" width="180">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav me-3">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Aktivitas Saya</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        <a href="profile.html" class="text-dark text-decoration-none d-flex align-items-center">
+          <i class="bi bi-person-circle fs-5 me-2"></i>
+          <span class="fw-semibold">Lee Jeno</span>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- ======= MAIN CONTENT ======= -->
-  <main class="container py-5">
-    <h2 class="text-center mb-4 text-pink">Status Lamaran</h2>
-    <div class="row justify-content-center">
-      <div class="col-lg-10" id="applicationList">
-        <!-- Status lamaran akan dirender via JavaScript -->
+<!-- Container -->
+<div class="container py-5">
+  <div class="d-flex align-items-center mb-4">
+  <button onclick="history.back()" class="btn-back me-3" aria-label="Kembali">
+    <i class="bi bi-arrow-left-circle-fill fs-4 text-white"></i>
+  </button>
+  <h4 class="fw-bold mb-0">Lihat Lowongan</h4>
+</div>
+
+
+  <!-- Lamaran List -->
+  <div class="list-group">
+
+    <!-- Lamaran 1 -->
+    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#modal1">
+      <div>
+        <h6 class="mb-1 fw-semibold">Web Developer</h6>
+        <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+          <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+          <span><i class="bi bi-briefcase-fill me-1"></i>Full-Time</span>
+          <span><i class="bi bi-house-door-fill me-1"></i>Hybrid</span>
+          <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+        </small>
+      </div>
+      <span class="badge bg-warning text-dark">Diproses</span>
+    </a>
+
+    <!-- Lamaran 2 -->
+    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#modal2">
+      <div>
+        <h6 class="mb-1 fw-semibold">UI/UX Designer Intern</h6>
+        <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+          <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+          <span><i class="bi bi-briefcase-fill me-1"></i>Full-Time</span>
+          <span><i class="bi bi-house-door-fill me-1"></i>Onsite</span>
+          <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+        </small>
+      </div>
+      <span class="badge bg-danger">Ditolak</span>
+    </a>
+
+    <!-- Lamaran 3 -->
+    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" data-bs-toggle="modal" data-bs-target="#modal3">
+      <div>
+        <h6 class="mb-1 fw-semibold">Content Writer Freelance</h6>
+        <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+          <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+          <span><i class="bi bi-briefcase-fill me-1"></i>Freelance</span>
+          <span><i class="bi bi-house-door-fill me-1"></i>Remote</span>
+          <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+        </small>
+      </div>
+      <span class="badge bg-success">Diterima</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- MODAL DETAIL LAMARAN -->
+
+<!-- Modal 1 -->
+<div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="modalTitle1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 p-3">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <!-- Header -->
+        <div class="d-flex align-items-start mb-3">
+          <img src="assets/logo1.png" alt="Logo Winnicode" width="70" class="me-3">
+          <div>
+            <h4 class="fw-bold mb-1">Web Developer</h4>
+            <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+              <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+              <span><i class="bi bi-briefcase-fill me-1"></i>Full-Time</span>
+              <span><i class="bi bi-house-door-fill me-1"></i>Hybrid</span>
+              <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+            </small>
+          </div>
+        </div>
+
+        <!-- Timeline Lamaran -->
+        <div class="application-timeline">
+          <div class="timeline-step">
+            <span class="badge bg-primary rounded-pill px-3 py-2 fw-semibold">Lamaran Diterima</span>
+            <div class="text-muted mt-1">28 Feb 2025, 14:00 WIB</div>
+          </div>
+          <div class="timeline-step mt-3">
+            <span class="badge bg-warning text-dark rounded-pill px-3 py-2 fw-semibold">Lamaran Ditinjau</span>
+            <div class="text-muted mt-1">14 Mar 2025, 00:04 WIB</div>
+          </div>
+        </div>
+
       </div>
     </div>
-  </main>
+  </div>
+</div>
 
-  <!-- ======= FOOTER ======= -->
-  <footer class="text-center py-4 bg-light border-top">
-    <small>&copy; 2025 Winnicode. All rights reserved.</small>
-  </footer>
 
-  <!-- Bootstrap Bundle JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Modal 2 -->
+<div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 p-3">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <!-- Header -->
+        <div class="d-flex align-items-start mb-3">
+          <img src="assets/logo1.png" alt="Logo Winnicode" width="70" class="me-3">
+          <div>
+            <h4 class="fw-bold mb-1">UI/UX Designer Internship</h4>
+            <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+              <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+              <span><i class="bi bi-briefcase-fill me-1"></i>Full-Time</span>
+              <span><i class="bi bi-house-door-fill me-1"></i>Onsite</span>
+              <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+            </small>
+          </div>
+        </div>
 
-  <!-- Custom JS -->
-  <script src="application-status.js"></script>
+        <!-- Timeline -->
+        <div class="application-timeline">
+          <div class="timeline-step">
+            <span class="badge bg-primary rounded-pill px-3 py-2 fw-semibold">Lamaran Diterima</span>
+            <div class="text-muted mt-1">28 Feb 2025, 10:00 WIB</div>
+          </div>
+          <div class="timeline-step mt-3">
+            <span class="badge bg-danger rounded-pill px-3 py-2 fw-semibold">Lamaran Ditinjau (Ditolak)</span>
+            <div class="text-muted mt-1">02 Mar 2025, 13:40 WIB</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 p-3">
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <!-- Header -->
+        <div class="d-flex align-items-start mb-3">
+          <img src="assets/logo1.png" alt="Logo Winnicode" width="70" class="me-3">
+          <div>
+            <h4 class="fw-bold mb-1">Content Writer Freelance</h4>
+            <small class="text-muted d-flex align-items-center gap-2 flex-wrap">
+              <span><i class="bi bi-geo-alt-fill me-1"></i>Bandung</span>
+              <span><i class="bi bi-briefcase-fill me-1"></i>Freelance</span>
+              <span><i class="bi bi-house-door-fill me-1"></i>Remote</span>
+              <span><i class="bi bi-cash-stack me-1"></i>Negotiable</span>
+            </small>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="application-timeline">
+          <div class="timeline-step">
+            <span class="badge bg-primary rounded-pill px-3 py-2 fw-semibold">Lamaran Diterima</span>
+            <div class="text-muted mt-1">24 Feb 2025, 11:11 WIB</div>
+          </div>
+          <div class="timeline-step mt-3">
+            <span class="badge bg-warning text-dark rounded-pill px-3 py-2 fw-semibold">Lamaran Ditinjau</span>
+            <div class="text-muted mt-1">26 Feb 2025, 15:00 WIB</div>
+          </div>
+          <div class="timeline-step mt-3">
+            <span class="badge bg-success rounded-pill px-3 py-2 fw-semibold">Diterima</span>
+            <div class="text-muted mt-1">28 Feb 2025, 09:30 WIB</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

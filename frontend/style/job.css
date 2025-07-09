@@ -2,7 +2,7 @@
    GLOBAL COLOR PALETTE
    ===================================================== */
 :root {
-  --pink-bg: #eb44bb;  /* warna pink solid (sama seperti accent) */
+  --pink-bg: #eb44bb;
   --pink-accent: #eb44bb;
   --purple-text: #7854C5;
   --gray-text: #333333;
@@ -33,6 +33,13 @@ a:hover {
   color: var(--pink-accent);
 }
 
+button:focus,
+.btn:focus,
+a:focus-visible {
+  outline: 2px solid var(--pink-accent);
+  outline-offset: 2px;
+}
+
 /* =====================================================
    NAVBAR
    ===================================================== */
@@ -43,14 +50,7 @@ a:hover {
   background-color: var(--white) !important;
   box-shadow: var(--shadow);
   border-bottom: 2px solid rgba(0, 0, 0, .02);
-  padding: 0.75rem 1rem;
-  transition: padding 0.3s ease;
-}
-
-.navbar.shrink {
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 1.5rem;
 }
 
 .navbar .container {
@@ -66,9 +66,14 @@ a:hover {
 }
 
 .navbar-brand img {
-  height: 46px;
+  height: 60px;
   width: auto;
   display: block;
+}
+
+.navbar.shrink .navbar-brand img {
+  height: 40px;
+  transition: height 0.3s ease;
 }
 
 .navbar-toggler {
@@ -80,15 +85,21 @@ a:hover {
 }
 
 .navbar-nav {
+  display: flex;
+  align-items: center;
   gap: 1.75rem;
+  flex-direction: row;
 }
 
 .navbar-nav .nav-link {
-  color: var(--gray-text) !important;
   font-weight: 600;
-  padding: 0.25rem 0;
+  color: var(--gray-text) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 10px 20px;
   position: relative;
-  transition: color 0.2s;
+  transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .navbar-nav .nav-link::after {
@@ -99,12 +110,14 @@ a:hover {
   width: 0;
   height: 2px;
   background: var(--pink-accent);
-  transition: width 0.25s;
+  transition: width 0.3s ease;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link.active {
   color: var(--pink-accent) !important;
+  background-color: rgba(235, 68, 187, 0.1);
+  border-radius: 30px;
 }
 
 .navbar-nav .nav-link:hover::after,
@@ -112,26 +125,11 @@ a:hover {
   width: 100%;
 }
 
-.nav-link:focus-visible {
-  outline: 2px solid var(--pink-accent);
-  outline-offset: 2px;
-}
-
-.nav-link.underline::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--pink-accent);
-}
-
-/* Profile / Auth */
+/* Profile Menu */
 #profileMenu {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 10px;
 }
 
 #navbarUsername {
@@ -156,45 +154,119 @@ a:hover {
 }
 
 /* =====================================================
-   BUTTONS
+   SEARCH BAR AND FILTER
    ===================================================== */
-.btn-primary {
-  background-color: var(--pink-accent);
-  border-color: var(--pink-accent);
+.search-bar-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
-  opacity: 0.9;
-  background-color: var(--pink-accent);
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.btn-outline-primary {
-  color: var(--pink-accent);
-  border-color: var(--pink-accent);
+#jobSearch {
+  width: 100%;
+  max-width: 700px;
+  padding-left: 40px;
+  border-radius: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-outline-primary:hover {
+.input-group-text {
+  background-color: var(--white);
+  border-right: 0;
+  border-radius: 1rem 0 0 1rem;
+  padding: 10px;
+}
+
+.input-group .form-control {
+  border-radius: 1rem;
+  padding-left: 40px;
+}
+
+.dropdown {
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.btn-filter-white {
+  font-weight: 600;
+  border-radius: 2rem;
+  padding: 0.6rem 1.2rem;
   background-color: var(--pink-accent);
   color: var(--white);
 }
 
-.btn-outline-pink {
-  color: var(--pink-accent);
-  border: 1px solid var(--pink-accent);
-  background-color: transparent;
-  transition: background-color 0.2s, color 0.2s;
+.btn-filter-white:hover {
+  background-color: #d93ba9;
 }
 
-.btn-outline-pink:hover {
-  background-color: var(--pink-accent);
-  color: var(--white);
+.dropdown-menu {
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: rgba(235, 68, 187, 0.1);
+  color: var(--pink-accent);
+}
+
+/* =====================================================
+   JOB CARDS
+   ===================================================== */
+.card {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--white);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.card-title {
+  color: var(--purple-text);
+  font-weight: 700;
+  font-size: 1.25rem;
+  overflow-wrap: break-word;
+}
+
+.job-meta {
+  font-size: 0.875rem;
+  color: var(--gray-text);
+}
+
+.job-meta span {
+  margin-right: 10px;
+}
+
+.job-meta i {
+  font-size: 1rem;
 }
 
 .apply-btn {
   background-color: var(--pink-accent) !important;
   color: var(--white) !important;
   border: none;
+  margin-top: 15px;
+  padding: 12px 20px;
   transition: opacity 0.2s;
 }
 
@@ -203,96 +275,178 @@ a:hover {
 }
 
 /* =====================================================
-   CARDS (JOB LISTINGS)
+   MODAL DETAIL PEKERJAAN
    ===================================================== */
-.card {
-  border: none;
-  border-radius: 1rem;
-  box-shadow: var(--shadow);
-  overflow: hidden;
-  margin-bottom: 2rem; /* ✅ Tambahkan baris ini */
-}
-
-.card-title {
-  color: var(--purple-text);
-  font-weight: 700;
-}
-
-.badge {
-  background-color: var(--pink-accent);
-  color: var(--white);
-  font-weight: 500;
-  border-radius: 0.5rem;
-  padding: 0.35em 0.75em;
-}
-
-/* =====================================================
-   MODALS
-   ===================================================== */
-.modal-content {
-  border: none;
-  border-radius: 1rem;
-  box-shadow: var(--shadow);
-}
-
 .modal-header {
   background-color: var(--pink-accent);
   color: var(--white);
-  border-bottom: none;
+  border-radius: 0 0 0 0;
+  padding: 1rem;
 }
 
-.modal-header .btn-close {
-  filter: invert(1);
-  opacity: 0.8;
-}
-
-.modal .btn-primary {
-  background-color: var(--pink-accent);
-  border-color: var(--pink-accent);
-}
-
-/* =====================================================
-   ALERTS
-   ===================================================== */
-.alert-success {
-  background-color: var(--pink-accent);
-  border-color: var(--pink-accent);
+/* Tetap pertahankan warna putih untuk judul pekerjaan di header modal */
+.modal-header .modal-title {
+  font-size: 1.25rem;
+  font-weight: bold;
   color: var(--white);
-  font-weight: 500;
+}
+
+/* Judul bagian seperti "Deskripsi Pekerjaan", "Persyaratan", dan "Skill" tetap ungu */
+.modal-body h6,
+.modal-body strong {
+  color: var(--purple-text);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Isi paragraf dan list jadi warna hitam normal */
+.modal-body p,
+.modal-body ul,
+.modal-body li {
+  color: var(--gray-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+
+.modal-body .d-flex {
+  background-color: transparent;
+  color: var(--white);
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.modal-body .badge {
+  background-color: #4f8ad6;
+  color: var(--white);
+  font-weight: 600;
+  padding: 5px 15px;
+  border-radius: 1.5rem;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-footer .btn-primary {
+  background-color: var(--pink-accent);
+  border: none;
+  color: var(--white);
+}
+
+.modal-footer .btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #d93ba9;
+}
+
+.modal-footer .btn-secondary:hover {
+  background-color: #ddd;
 }
 
 /* =====================================================
-   UTILITIES
+   BUTTONS (LOGIN / REGISTER)
    ===================================================== */
-
-.bg-blue {
-  background-color: #2196f3 !important;
-  color: var(--white) !important;
+.btn-daftar {
+  background-color: #da3ac2;
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 0.6rem 1.8rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
-.text-purple {
-  color: var(--purple-text) !important;
+.btn-daftar:hover {
+  background-color: #c62bb1;
 }
 
-.text-pink {
-  color: var(--pink-accent) !important;
+.btn-masuk {
+  background-color: transparent;
+  color: #2196f3;
+  font-weight: 700;
+  border: 2px solid #2196f3;
+  padding: 0.6rem 1.8rem;
+  border-radius: 999px;
+  transition: all 0.3s ease;
 }
 
-.text-info {
-  color: #2196f3 !important;
+.btn-masuk:hover {
+  background-color: rgba(33, 150, 243, 0.1);
+}
+
+.btn-outline-blue {
+  background-color: #fff;
+  color: #2196f3;
+  border: 2px solid #2196f3;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-outline-blue:hover {
+  background-color: #2196f3;
+  color: #fff;
+  border-color: #2196f3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 /* =====================================================
    RESPONSIVE TWEAKS
    ===================================================== */
 @media (max-width: 768px) {
-  .navbar {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  .navbar .container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .navbar-nav {
-    gap: 1rem;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    width: 100%;
+    text-align: left;
+    padding: 5px 10px;
+  }
+
+  #profileMenu {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .search-bar-container {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .dropdown {
+    margin-top: 15px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
   }
 }
 
@@ -300,62 +454,109 @@ a:hover {
   .card {
     margin-inline: 0.25rem;
   }
+
+  .search-bar-container {
+    gap: 10px;
+    padding: 0 0.5rem;
+  }
+
+  .dropdown {
+    margin-top: 10px;
+  }
 }
 
-/* =====================================================
-   JOB META INFO BAR
-   ===================================================== */
-.job-meta {
+/* ============================
+   PERBAIKAN DETAIL MODAL PEKERJAAN
+   ============================ */
+.modal-body {
+  padding: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.modal-body h6 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--purple-text);
+}
+
+.modal-body p,
+.modal-body li {
+  font-weight: 500; /* Lebih tebal dari normal */
+  margin-bottom: 10px;
+}
+
+.modal-body ul {
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+.modal-body .company-profile {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-  font-size: 0.875rem;
+  gap: 15px;
   margin-bottom: 1rem;
 }
 
-.job-meta span {
+.modal-body .company-profile img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.modal-body .company-profile-info h5 {
+  margin: 0;
+  font-weight: 600;
+  color: var(--purple-text);
+}
+
+.modal-body .company-profile-info .badges {
   display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 
-.job-meta i {
-  font-size: 1rem;
-}
-
-/* =====================================================
-   CARD CUSTOMIZATION FIXES
-   ===================================================== */
-.card-body {
-  padding: 1.5rem;
-}
-
-.card .badge {
+.modal-body .company-profile-info .badge {
+  background-color: #333;
+  color: white;
   font-size: 0.75rem;
-  padding: 0.4em 0.75em;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 999px;
 }
 
-/* =====================================================
-   SECTION SPACING / CONTAINER
-   ===================================================== */
-.container {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+.modal-body .badge-skill {
+  background-color: #4f8ad6;
+  font-weight: 600;
+  padding: 6px 15px;
+  border-radius: 2rem;
+  color: white;
+  margin: 5px 5px 0 0;
 }
 
-/* =====================================================
-   MEDIA QUERY IMPROVEMENTS
-   ===================================================== */
-@media (max-width: 768px) {
-  .job-meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
+/* Judul pekerjaan di modal */
+.modal-title {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+}
 
-  .apply-btn {
-    width: 100%;
-    text-align: center;
-  }
+/* Judul bagian (Deskripsi Pekerjaan, Persyaratan, Skill) */
+.modal-body h6 {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: var(--purple-text);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Isi paragraf deskripsi pekerjaan dan list persyaratan */
+.modal-body p,
+.modal-body li {
+  font-weight: 600 !important;
+  font-size: 1.05rem;
+  color: var(--gray-text);
 }

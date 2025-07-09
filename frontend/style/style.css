@@ -6,8 +6,8 @@
 }
 
 html {
-      scroll-behavior: smooth;
-    }
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -41,31 +41,91 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
   border: none;
   padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
+  border-radius: 30px; /* Membuat sudut lebih melengkung */
+  font-weight: 600; /* Menambah ketebalan font */
+  font-size: 1rem; /* Ukuran font sedikit lebih besar */
   transition: 0.3s ease;
   text-align: center;
+  display: inline-block;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Menambahkan shadow */
+}
+
+/* Tombol "Daftar" khusus dengan warna teks pink solid */
+.btn-pink.daftar {
+  color: #eb44bb; /* Mengubah warna teks menjadi pink solid untuk tombol Daftar */
+}
+
+/* Efek hover pada tombol "Daftar" */
+.btn-pink.daftar:hover {
+  color: #fff; /* Warna teks menjadi putih saat hover */
+  background-color: #d936a6;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Shadow lebih besar saat hover */
+  transform: translateY(-2px); /* Memberikan efek naik saat hover */
 }
 
 .btn-pink:hover,
 .btn-save:hover {
   background-color: #d936a6;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Shadow lebih besar saat hover */
+  transform: translateY(-2px); /* Memberikan efek naik saat hover */
 }
 
-.btn-outline-pink {
+.btn-outline-pink,
+.btn-outline-blue {
   background-color: #fff;
-  color: #eb44bb;
-  border: 2px solid #eb44bb;
+  color: #eb44bb; /* Sesuaikan warna teks dengan warna tombol */
+  border: 2px solid #eb44bb; /* Border yang lebih tegas */
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: 30px; /* Bentuk yang lebih melengkung */
   font-weight: 600;
+  font-size: 1rem;
   transition: 0.3s ease;
+  display: inline-block;
+  text-align: center;
 }
 
-.btn-outline-pink:hover {
+.btn-outline-pink:hover,
+.btn-outline-blue:hover {
   background-color: #eb44bb;
   color: #fff;
+  border-color: #eb44bb; /* Pastikan border berubah sesuai dengan warna tombol */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
+  transform: translateY(-2px); /* Efek tombol terangkat */
+}
+
+/* Style tambahan untuk tombol di navbar */
+.navbar-nav .nav-link {
+  font-weight: 600;
+  color: #333 !important;
+  text-transform: uppercase; /* Membuat huruf jadi kapital */
+  letter-spacing: 1px; /* Memberikan jarak antar huruf */
+  padding: 10px 20px; /* Ukuran padding yang lebih besar */
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #eb44bb !important;
+  background-color: rgba(235, 68, 187, 0.1); /* Efek background saat hover */
+  border-radius: 30px; /* Menambahkan border radius pada navbar link */
+}
+
+/* Efek hover pada tombol Daftar dan Masuk */
+.navbar-nav .nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #eb44bb;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
 }
 
 /* ========== FORM ========== */
@@ -174,7 +234,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ========== NAVBAR SHRINK EFFECT ========== */
 .navbar {
-  padding: 1rem 1.5rem;
+  padding: 1rem 3rem; /* Tambah padding kiri-kanan */
   transition: padding 0.3s ease;
 }
 
@@ -226,7 +286,7 @@ footer {
 
 .section-title {
   font-weight: 700;
-  color: #2196f3;
+  color: #FFFF;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   display: inline-block;
@@ -234,106 +294,139 @@ footer {
   padding-bottom: 5px;
 }
 
+/* ========== RESPONSIVE (MOBILE) ========== */
 @media (max-width: 767.98px) {
-
-  /* —— NAVBAR —— */
-  /* 1. Hilangkan garis putih “patah” saat collapse disembunyikan */
   .navbar-collapse:not(.show) { border-top: none !important; }
-
-  /* 2. Lebih ringkas: logo & toggler */
   .navbar { padding: .5rem 1rem; }
-  .navbar-brand img { width: 160px; }              /* logo sedikit lebih kecil */
-  .navbar-toggler  { padding: .4rem .7rem; }       /* toggler slim */
+  .navbar-brand img { width: 160px; }
+  .navbar-toggler { padding: .4rem .7rem; }
   .navbar-toggler-icon { width: 1.25em; height: 1.25em; }
 
+  h1 { font-size: 1.55rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.25rem; }
+  h4, h5, h6 { font-size: 1.05rem; }
+  p, li, a, .btn, .nav-link { font-size: .9rem; }
 
-  /* — Font size — */
-  h1         { font-size: 1.55rem; line-height: 1.3; }
-  h2         { font-size: 1.35rem; line-height: 1.35; }
-  h3         { font-size: 1.25rem; line-height: 1.4; }
-  h4, h5, h6 { font-size: 1.05rem; line-height: 1.45; }
-  p, li, a,
-  .btn, .nav-link {
-    font-size: .9rem;
-  }
-
-  /* — Container gutter — */
   .container,
   .container-lg,
   .container-md { padding-left: 1rem; padding-right: 1rem; }
 
-  /* — Section vertical rhythm — */
-  section[id]            { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
-  section[id] h1, 
-  section[id] h2,
-  section[id] h3         { margin-bottom: 1rem; }        /* heading-body lebih rapat */
-  section[id] p          { margin-bottom: 1rem; }
+  section[id] { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+  section[id] h1, section[id] h2, section[id] h3 { margin-bottom: 1rem; }
+  section[id] p { margin-bottom: 1rem; }
 
-  /* — Card / grid icon “Cara Kerja” — */
-  #cara-kerja img        { width: 48px; }                /* icon lebih kecil */
-  #cara-kerja p          { font-size: .85rem; }
+  #cara-kerja img { width: 48px; }
+  #cara-kerja p { font-size: .85rem; }
 
-  /* — Tombol — */
-  .btn                   { padding: .55rem 1rem; font-weight: 600; }
+  .btn { padding: .55rem 1rem; font-weight: 600; }
 
-  /* — Footer links — */
-  footer li, footer a    { font-size: .85rem; }
-  /* —— HERO —— */
-  /* hilangkan “gutter” container agar warna latar memenuhi layar */
+  footer li, footer a { font-size: .85rem; }
+
   .hero .container,
-  .hero .row        { padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; }
-  /* jaga agar gambar tidak melebar melebihi layar */
+  .hero .row { padding-left: 0; padding-right: 0; margin-left: 0; margin-right: 0; }
+
   .hero img.img-fluid { max-width: 100%; height: auto; }
 
-  /* —— UMUM —— */
-  /* cegah scroll horizontal akibat spacing negatif/gambar besar */
   body { overflow-x: hidden; }
 
-   /* ——— BLOK PROFIL ——— */
   #profileMenu {
-    flex-direction: column;          /* sudah vertikal */
-    align-items: flex-start;         /* rata kiri, sejajar nav-link */
+    flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     margin-top: .75rem;
-    border-top: 1px solid #e5e5e5;   /* pembatas visual */
+    border-top: 1px solid #e5e5e5;
     padding-top: 1rem;
     gap: .75rem;
   }
 
-  /* nama + ikon */
   #profileMenu a {
     font-size: .95rem;
     font-weight: 600;
     display: flex;
     align-items: center;
-    gap: .35rem;                     /* jarak ikon ↔ nama */
+    gap: .35rem;
   }
+
   #profileMenu i { font-size: 1.15rem; }
 
-  /* ——— LOGOUT BUTTON ——— */
   #logoutBtn {
-    width: 100%;                     /* full-width utk kemudahan sentuh */
+    width: 100%;
     text-align: center;
     padding: .55rem 1rem;
     font-size: .9rem;
   }
 }
 
-/* ―― Tampilan default (≥ 768 px) ―― */
+/* === Tampilan desktop === */
 #profileMenu {
-  display: flex;               /* sejajar horizontal */
-  align-items: center;         /* vertikal rata-tengah */
-  gap: 1rem;                   /* jarak nama ↔ tombol */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-#profileMenu a {               /* link berisi icon + nama */
+#profileMenu a {
   font-weight: 600;
-  color: #000;                 /* pastikan tidak abu-abu */
+  color: #000;
   text-decoration: none;
 }
 
-#logoutBtn {
-  padding: .35rem .85rem;      /* sedikit lebih tinggi  */
-  font-size: .85rem;
-  line-height: 1;              /* height pas            */
+/* === Modal heading warna putih === */
+#signupModal .col-md-6 h3,
+#loginModal .col-md-6 h3 {
+  color: white !important;
+}
+
+/* === Navbar Links === */
+.navbar-nav .nav-link {
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: #333 !important;
+  padding: 0.25rem 0;
+  position: relative;
+  transition: color 0.2s ease;
+  font-size: 1rem;
+}
+
+/* === Underline saat hover === */
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: #eb44bb;
+  transition: width 0.25s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: #eb44bb !important;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.btn-outline-blue {
+  background-color: #fff;
+  color: #2196f3; /* Warna biru */
+  border: 2px solid #2196f3;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-outline-blue:hover {
+  background-color: #2196f3;
+  color: #fff;
+  border-color: #2196f3;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }

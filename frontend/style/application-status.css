@@ -1,68 +1,234 @@
-/* =====================================================
-   APPLICATION STATUS STYLES
-   ===================================================== */
+/* =======================
+   APPLICATION STATUS PAGE
+======================= */
 
-#applicationList .card {
-  border: 1px solid #eee;
-  border-radius: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
-  padding: 1.5rem;
-  transition: transform 0.2s;
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#applicationList .card:hover {
-  transform: scale(1.01);
+:root {
+  --pink-bg: #eb44bb;
+  --pink-accent: #eb44bb;
+  --gray-text: #333333;
+  --white: #ffffff;
+  --badge-radius: 20px;
 }
 
-#applicationList .card-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--purple-text);
-  margin-bottom: 0.25rem;
-}
-
-#applicationList .card-subtitle {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 0.5rem;
-}
-
-#applicationList .status-badge {
-  display: inline-block;
-  padding: 0.35em 0.75em;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
+/* Body */
+body {
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--pink-bg);
   color: var(--white);
+  line-height: 1.6;
 }
 
-.status-pending {
-  background-color: #ffc107; /* kuning */
+/* Tombol kembali */
+.btn-back {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--white);
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-.status-accepted {
-  background-color: #28a745; /* hijau */
+.btn-back:hover {
+  color: #f8f8f8;
 }
 
-.status-rejected {
-  background-color: #dc3545; /* merah */
+/* Judul halaman */
+h4.fw-bold {
+  font-size: 1.7rem;
 }
 
-#applicationList .card-text {
-  font-size: 0.95rem;
+/* List Lamaran */
+.list-group-item {
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fff;
   color: var(--gray-text);
-  margin-bottom: 0.25rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s;
 }
 
-#applicationList .timestamp {
-  font-size: 0.85rem;
-  color: #888;
+.list-group-item:hover {
+  background-color: #f8f9fa;
 }
 
-/* Responsive padding for mobile */
-@media (max-width: 575.98px) {
-  #applicationList .card {
-    padding: 1rem;
+/* Status badge di list */
+.list-group-item .badge {
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  border-radius: var(--badge-radius);
+  text-transform: uppercase;
+}
+
+/* Modal */
+.modal-content {
+  background-color: #fff;
+  color: var(--gray-text);
+  border-radius: 1rem;
+}
+
+/* Modal header close icon modern */
+.modal-header-custom {
+  position: relative;
+}
+
+.modal-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.modal-close-icon:hover {
+  color: #333;
+}
+
+/* Modal header text */
+.modal-body h4 {
+  font-weight: 700;
+  color: var(--gray-text);
+}
+
+/* Timeline Lamaran */
+.application-timeline .timeline-step {
+  margin-bottom: 1.5rem;
+}
+
+.application-timeline .badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--badge-radius);
+}
+
+.application-timeline .text-muted {
+  font-size: 0.9rem;
+}
+
+/* Timeline Step Box (kalau pakai box) */
+.application-timeline .status-box {
+  border-radius: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  text-align: center;
+  height: 100%;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.03);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .application-timeline .row {
+    flex-direction: column;
   }
+
+  h4.fw-bold {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .btn-back {
+    font-size: 1.25rem;
+  }
+}
+
+/* =======================
+   NAVBAR LINK + ACTIVE
+======================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background-color: var(--white) !important;
+  box-shadow: var(--shadow);
+  border-bottom: 2px solid rgba(0, 0, 0, .02);
+  padding: 1rem 1.5rem;
+  transition: padding 0.3s ease;
+}
+
+.navbar.shrink {
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+.navbar.shrink .navbar-brand img {
+  height: 40px;
+  transition: height 0.3s ease;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+.navbar-nav {
+  gap: 1.75rem;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 600;
+  color: var(--gray-text) !important;
+  text-transform: uppercase; /* Membuat huruf jadi kapital */
+  letter-spacing: 1px; /* Memberikan jarak antar huruf */
+  padding: 10px 20px; /* Ukuran padding yang lebih besar */
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--pink-accent);
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--pink-accent) !important;
+  background-color: rgba(235, 68, 187, 0.1); /* Efek background saat hover */
+  border-radius: 30px; /* Menambahkan border radius pada navbar link */
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--pink-accent);
+  outline-offset: 2px;
 }
