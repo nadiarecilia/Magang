@@ -11,6 +11,8 @@ class PelamarProfile extends Model
 
     protected $fillable = [
         'user_id',
+        'first_name',
+        'last_name',
         'profile_picture',
         'phone',
         'gender',
@@ -26,6 +28,7 @@ class PelamarProfile extends Model
         'skills',
         'languages',
         'interests',
+        'major',
     ];
 
     public function user()

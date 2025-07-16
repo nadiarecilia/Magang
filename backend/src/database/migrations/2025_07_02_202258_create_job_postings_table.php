@@ -19,11 +19,12 @@ return new class extends Migration
             $table->text('description');
             $table->text('requirement');
             $table->enum('location', ['Remote', 'Onsite', 'Hybrid']);
-            $table->string('work_location')->nullable(); 
+            $table->string('work_location')->nullable();
             $table->enum('employment_type', ['Full-Time', 'Freelance', 'Internship']);
-            $table->string('salary');
+            $table->string('salary')->default('Negotiable');
             $table->date('deadline');
-            $table->enum('status', ['aktif', 'nonaktif'])->default('aktif');
+            $table->json('skills')->nullable(); 
+            $table->enum('status', ['Aktif', 'Tidak Aktif'])->default('Aktif');
             $table->timestamps();
         });
     }

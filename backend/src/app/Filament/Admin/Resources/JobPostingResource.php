@@ -105,6 +105,16 @@ class JobPostingResource extends Resource
                             ->label('Gaji')
                             ->default('Negotiable')
                             ->maxLength(255),
+
+                            Forms\Components\TagsInput::make('skills')
+                            ->label('Skill yang Dibutuhkan')
+                            ->placeholder('Contoh: Laravel, Figma, SEO')
+                            ->suggestions([
+                                'Laravel', 'ReactJS', 'Figma', 'UI/UX', 'Docker', 'SEO', 'After Effects', 'AWS', 'Google Ads'
+                            ])
+                            ->splitKeys(['Enter', ','])
+                            ->hint('Pisahkan dengan Enter atau Koma')
+                            ->dehydrateStateUsing(fn ($state) => implode(', ', $state)),
                     ])
                     ->collapsible(),
 
@@ -163,6 +173,11 @@ class JobPostingResource extends Resource
 
                 Tables\Columns\TextColumn::make('salary')
                     ->label('Gaji'),
+                
+                Tables\Columns\TagsColumn::make('skills')
+                    ->label('Skill')
+                    ->separator(', ')
+                    ->limit(3),
 
                 Tables\Columns\TextColumn::make('deadline')
                     ->label('Tenggat')

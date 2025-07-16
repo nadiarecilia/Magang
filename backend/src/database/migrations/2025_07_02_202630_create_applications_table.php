@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone')->nullable();
             $table->string('domicile')->nullable();
+            $table->string('profesi')->nullable();           
+            $table->string('profesi_lainnya')->nullable();    
+            $table->string('instansi')->nullable(); 
             $table->string('education_level')->nullable();
             $table->enum('position_experience', ['<1 tahun', '1-2 tahun', '3-5 tahun', '>5 tahun'])->nullable();
             $table->text('impactful_project')->nullable();

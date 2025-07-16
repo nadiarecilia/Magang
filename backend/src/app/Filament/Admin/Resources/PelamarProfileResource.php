@@ -32,7 +32,7 @@ class PelamarProfileResource extends Resource
                                 ->relationship(
                                     name: 'user',
                                     titleAttribute: 'name',
-                                    modifyQueryUsing: fn ($query) => $query->where('role', 'Pelamar')
+                                    modifyQueryUsing: fn ($query) => $query->where('role', 'pelamar')
                                 )
                                 ->label('Nama Akun')
                                 ->required(),
@@ -84,6 +84,12 @@ class PelamarProfileResource extends Resource
                                 ])
                                 ->label('Tingkat Pendidikan'),
 
+                            Forms\Components\TextInput::make('major')  // Menambahkan kolom major
+                                ->label('Jurusan')
+                                ->placeholder('Masukkan Jurusan Anda')
+                                ->required()  // Jika perlu wajib diisi
+                                ->maxLength(255),
+
                             Forms\Components\Textarea::make('skills')
                                 ->label('Keahlian')
                                 ->rows(2),
@@ -126,6 +132,9 @@ class PelamarProfileResource extends Resource
                 Tables\Columns\TextColumn::make('phone')->label('Telepon'),
                 Tables\Columns\TextColumn::make('gender')->label('Gender'),
                 Tables\Columns\TextColumn::make('education_level')->label('Pendidikan'),
+                Tables\Columns\TextColumn::make('major')  // Menambahkan kolom Major
+                    ->label('Jurusan')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y H:i')

@@ -20,6 +20,7 @@ class JobPosting extends Model
         'employment_type',
         'salary',
         'deadline',
+        'skills',
         'status',
     ];
 

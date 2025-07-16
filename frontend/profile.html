@@ -23,7 +23,21 @@
     </div>
   </nav>
 
-  
+    <!-- NAVIGATION MENU -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="find-job.html">Lihat Lowongan</a>
+        </li>
+        </li>
+      </ul>
+    </div>
+
+
   <!-- TITLE -->
   <div class="container text-white my-4">
     <a href="index.html" class="text-white me-2"><i class="bi bi-arrow-left fs-4"></i></a>
@@ -57,17 +71,15 @@
           <div class="row gy-4">
             <div class="col-md-4"><span class="label">Email</span>  <span class="value" id="profileEmail">-</span></div>
             <div class="col-md-4"><span class="label">Phone</span>  <span class="value" id="profilePhone">-</span></div>
-            <div class="col-md-4"><span class="label">Lokasi</span> <span class="value" id="profileLocation">-</span></div>
-
+            <div class="col-md-4"><span class="label">Jurusan</span> <span class="value" id="profileMajor">-</span></div>
             <div class="col-md-4"><span class="label">Tempat Lahir</span> <span class="value" id="showBirthPlace">-</span></div>
             <div class="col-md-4"><span class="label">Tanggal Lahir</span> <span class="value" id="profileDOB">-</span></div>
             <div class="col-md-4"><span class="label">Jenis Kelamin</span><span class="value" id="showGender">-</span></div>
-
             <div class="col-md-4"><span class="label">No KTP</span> <span class="value" id="showKTP">-</span></div>
             <div class="col-md-4"><span class="label">Pendidikan Terakhir</span><span class="value" id="profileEducation">-</span></div>
             <div class="col-md-4"><span class="label">Alamat</span> <span class="value" id="showAddress">-</span></div>
           </div>
-        </div><!-- /.col-lg-9 -->
+        </div>
 
       </div><!-- ROW berakhir -->
 
@@ -94,7 +106,7 @@
         <div class="col-md-4 mb-4"><h6 class="fw-bold text-primary">Minat</h6>    <div id="interestTags"  class="d-flex flex-wrap gap-2"></div></div>
       </div>
 
-      <div class="text-end">           <!-- menempel ke kanan -->
+      <div class="text-end">          
   <button
     id="editProfileBtn"
     class="btn btn-outline-primary mt-3"
@@ -104,7 +116,7 @@
   </button>
 </div>
 
-    </div><!-- /.profile-card -->
+    </div>
     
   </div>
 
@@ -123,7 +135,6 @@
             <div class="col-md-6"><label class="form-label">Nama Lengkap *</label><input id="editUsername" class="form-control" required></div>
             <div class="col-md-6"><label class="form-label">Email *</label><input id="editEmail" type="email" class="form-control" required></div>
             <div class="col-md-6"><label class="form-label">No HP *</label><input id="editPhone" type="tel" class="form-control" required></div>
-            <div class="col-md-6"><label class="form-label">Lokasi Domisili</label><input id="editLocation" class="form-control"></div>
           </div>
 
           <!-- data personal -->
@@ -133,6 +144,7 @@
             <div class="col-md-6"><label class="form-label">Jenis Kelamin *</label><select id="gender" class="form-select" required><option value="">Pilih…</option><option>Laki-Laki</option><option>Perempuan</option></select></div>
             <div class="col-md-6"><label class="form-label">No KTP *</label><input id="editKtp" class="form-control" required></div>
             <div class="col-md-6"><label class="form-label">Pendidikan Terakhir *</label><select id="editEducation" class="form-select" required><option value="">Pilih…</option><option>SMA / Sederajat</option><option>D3</option><option>S1</option><option>S2</option><option>S3</option></select></div>
+            <div class="col-md-6"><label class="form-label">Jurusan *</label><input id="editMajor" class="form-control" required></div> 
             <div class="col-12"><label class="form-label">Alamat Lengkap</label><textarea id="address" rows="2" class="form-control autogrow" placeholder="Jl. …, Kota …"></textarea></div>
           </div>
 
