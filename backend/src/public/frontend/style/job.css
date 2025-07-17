@@ -262,12 +262,10 @@ a:focus-visible {
 }
 
 .job-title-pink {
-  background-color: pink;
-  color: white;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 30px;
-  display: inline-block;
+  font-size: 1.9rem !important; /* Ukuran font lebih besar */
+  font-weight: 900 !important;   /* Membuat font lebih tebal */
+  color: white !important;      /* Warna teks tetap putih */
+  background: none !important;  
 }
 
 
@@ -288,10 +286,12 @@ a:focus-visible {
    MODAL DETAIL PEKERJAAN
    ===================================================== */
 .modal-header {
-  background-color: var(--pink-accent);
-  color: var(--white);
-  border-radius: 0 0 0 0;
-  padding: 1rem;
+  background-color: #eb44bb !important; /* Latar belakang pink */
+  color: white !important;              /* Warna teks putih */
+  border-radius: 0.5rem 0.5rem 0 0;     /* Opsional: sudut membulat atas */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 /* Tetap pertahankan warna putih untuk judul pekerjaan di header modal */
@@ -304,6 +304,8 @@ a:focus-visible {
 /* Judul bagian seperti "Deskripsi Pekerjaan", "Persyaratan", dan "Skill" tetap ungu */
 .modal-body h6,
 .modal-body strong {
+  font-size: 1.5rem !important;  /* Ukuran font lebih besar seperti judul lainnya */
+  font-weight: 700 !important;
   color: var(--purple-text);
   font-weight: 600;
   margin-bottom: 10px;
@@ -490,7 +492,7 @@ a:focus-visible {
   font-weight: 700;
   margin-top: 1.25rem;
   margin-bottom: 0.75rem;
-  color: var(--purple-text);
+  color: var(--gray-text);
 }
 
 .modal-body p,
@@ -540,18 +542,22 @@ a:focus-visible {
 }
 
 .modal-body .badge-skill {
-  background-color: #4f8ad6;
-  font-weight: 600;
-  padding: 6px 15px;
-  border-radius: 2rem;
-  color: white;
-  margin: 5px 5px 0 0;
+  background-color: #2196f3 !important;  /* Mengubah latar belakang menjadi biru dengan prioritas tinggi */
+  font-weight: 600 !important;           /* Memastikan font lebih tebal */
+  padding: 6px 15px !important;         /* Menambahkan sedikit ruang di sekitar teks */
+  border-radius: 2rem !important;       /* Sudut membulat */
+  color: white !important;              /* Warna teks tetap putih */
+  margin: 5px 5px 0 0 !important; 
 }
 
 /* Judul pekerjaan di modal */
 .modal-title {
   font-size: 1.5rem !important;
   font-weight: 800 !important;
+  background-color: #eb44bb;  /* Mengubah latar belakang menjadi pink */
+  color: white;  /* Mengubah warna teks menjadi putih */
+  padding: 10px 20px;  /* Menambahkan padding agar lebih rapi */
+  border-radius: 10px;  /* Menambahkan border radius untuk sudut membulat */
 }
 
 /* Judul bagian (Deskripsi Pekerjaan, Persyaratan, Skill) */
