@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobPosting;
 use App\Models\JobCategory;
 use App\Models\Application;
+use App\Models\ApplicationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -18,65 +19,54 @@ class JobController extends Controller
         return view('frontend.job', compact('jobs', 'categories'));
     }
 
-    public function apply(Request $request)
-    {
-        // Pastikan user sudah login
-        if (!Auth::check()) {
-            return response()->json(['message' => 'Unauthenticated'], 401);
-        }
+     public function submitFromModal(Request $request)
+{
+    $request->validate([
+        'posisi' => 'required|string',
+        'nama' => 'required|string|max:255',
+        'email' => 'required|email',
+        'telepon' => 'required|string|max:20',
+        'domisili' => 'required|string|max:255',
+        'profesi' => 'required|string',
+        'profesi_lainnya' => 'nullable|string|max:255',
+        'instansi' => 'nullable|string|max:255',
+        'pendidikan' => 'required|string',
+        'pengalaman' => 'required|in:<1 tahun,1-2 tahun,3-5 tahun,>5 tahun',
+        'proyek' => 'required|string',
+        'cv' => 'required|mimes:pdf|max:2048',
+        'portfolio' => 'required|mimes:pdf,ppt,pptx,zip,rar|max:5120',
+    ]);
 
-        // Validasi data form
-        $validated = $request->validate([
-            'job_posting_id' => 'required|exists:job_postings,id',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'phone' => 'required|string',
-            'domicile' => 'required|string',
-            'profesi' => 'required|string',
-            'profesi_lainnya' => 'nullable|string',
-            'instansi' => 'nullable|string',
-            'education_level' => 'required|string',
-            'position_experience' => 'required|string',
-            'impactful_project' => 'required|string',
-            'cv'    => 'required|file|mimes:pdf|max:2048',  // Memastikan ukuran file CV maksimal 2MB dan formatnya PDF
-            'portfolio' => 'required|file|mimes:pdf,ppt,pptx,zip,rar|max:4096',  // Maksimal 4MB untuk Portofolio
-            'agree' => 'required|accepted',  // Pastikan user menyetujui Privacy Policy
-        ]);
+    $jobPosting = JobPosting::where('title', $request->posisi)->firstOrFail();
 
-        // Pastikan file CV dan Portofolio diupload
-        if ($request->hasFile('cv') && $request->hasFile('portfolio')) {
-            // Menyimpan file CV dan Portofolio di folder yang sesuai
-            $cvPath        = $request->file('cv')->store('applications/cv', 'public');
-            $portfolioPath = $request->file('portfolio')->store('applications/portfolio', 'public');
+    $cvPath = $request->file('cv')->store('applications/cv', 'public');
+    $portfolioPath = $request->file('portfolio')->store('applications/portfolio', 'public');
 
-            // Memastikan file sudah disimpan dengan benar
-            Log::info('CV Path: ', ['cv' => $cvPath]);
-            Log::info('Portfolio Path: ', ['portfolio' => $portfolioPath]);
+    $application = Application::create([
+        'user_id' => Auth::id(), // atau null jika belum login
+        'job_posting_id' => $jobPosting->id,
+        'name' => $request->nama,
+        'email' => $request->email,
+        'phone' => $request->telepon,
+        'domicile' => $request->domisili,
+        'profesi' => $request->profesi,
+        'profesi_lainnya' => $request->profesi === 'Lainnya' ? $request->profesi_lainnya : null,
+        'instansi' => $request->instansi,
+        'education_level' => $request->pendidikan,
+        'position_experience' => $request->pengalaman,
+        'impactful_project' => $request->proyek,
+        'cv_file' => $cvPath,
+        'portfolio_file' => $portfolioPath,
+    ]);
 
-            // Menyimpan data lamaran ke dalam database
-            Application::create([
-                'user_id' => Auth::id(),
-                'job_posting_id' => $request->job_posting_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'domicile' => $request->domicile,
-                'profesi' => $request->profesi,
-                'profesi_lainnya' => $request->profesi_lainnya,
-                'instansi' => $request->instansi,
-                'education_level' => $request->education_level,
-                'position_experience' => $request->position_experience,
-                'impactful_project' => $request->impactful_project,
-                'cv_file' => $cvPath,
-                'portfolio_file' => $portfolioPath,
-                'status' => 'Dikirim',
-            ]);
+    // Buat log awal
+    ApplicationLog::create([
+        'application_id' => $application->id,
+        'user_id' => Auth::id(),
+        'action' => 'Lamaran Dikirim',
+        'message' => 'Lamaran berhasil dikirim oleh pelamar.',
+    ]);
 
-            // Mengembalikan respons sukses
-            return response()->json(['message' => 'Lamaran berhasil dikirim.']);
-        } else {
-            // Jika file tidak ada
-            return response()->json(['message' => 'File CV atau Portofolio tidak ditemukan.'], 400);
-        }
-    }
+    return response()->json(['success' => true, 'message' => 'Lamaran berhasil dikirim']);
+}
 }

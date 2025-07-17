@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\ApplicationLogController;
 
 /* NOTE: Do Not Remove
 / Livewire asset handling if using sub folder in domain
@@ -43,5 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
-    Route::post('/apply', [JobController::class, 'apply'])->name('job.apply');
+    Route::post('/apply', [JobController::class, 'submitFromModal'])->name('application.submit');
+    
+    Route::get('/status', [ApplicationLogController::class, 'index'])->name('application.status');
+
 });

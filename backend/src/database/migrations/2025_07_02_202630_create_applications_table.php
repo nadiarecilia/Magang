@@ -27,7 +27,13 @@ return new class extends Migration
             $table->text('impactful_project')->nullable();
             $table->string('cv_file')->nullable();
             $table->string('portfolio_file')->nullable();
-            $table->enum('status', ['Dikirim', 'Diproses', 'Ditolak', 'Diterima'])->default('Dikirim');
+            $table->enum('status', [
+                'Lamaran Dikirim', 
+                'Lamaran Direview', 
+                'Interview', 
+                'Diterima', 
+                'Ditolak'
+            ])->default('Lamaran Dikirim');
             $table->timestamps();
         });
     }

@@ -52,6 +52,14 @@ class ApplicationLogResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('application.name')->label('Lamaran'),
+                Tables\Columns\TextColumn::make('application.status')->label('Status')->badge()->color(fn (string $state) => match ($state) {
+                    'Lamaran Dikirim' => 'gray',
+                    'Lamaran Direview' => 'warning',
+                    'Interview' => 'info',
+                    'Diterima' => 'success',
+                    'Ditolak' => 'danger',
+                    default => 'secondary',
+                }),
                 Tables\Columns\TextColumn::make('user.name')->label('Pengguna'),
                 Tables\Columns\TextColumn::make('action')->label('Aksi'),
                 Tables\Columns\TextColumn::make('message')->label('Pesan')->limit(50),

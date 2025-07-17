@@ -63,10 +63,11 @@ class ApplicationResource extends Resource
             Forms\Components\Select::make('status')
                 ->label('Status')
                 ->options([
-                    'Dikirim' => 'Dikirim',
-                    'Diproses' => 'Diproses',
-                    'Ditolak' => 'Ditolak',
+                    'Lamaran Dikirim' => 'Lamaran Dikirim',
+                    'Lamaran Direview' => 'Lamaran Direview',
+                    'Interview' => 'Interview',
                     'Diterima' => 'Diterima',
+                    'Ditolak' => 'Ditolak',
                 ])
                 ->required(),
         ]);
@@ -81,22 +82,28 @@ class ApplicationResource extends Resource
                 Tables\Columns\TextColumn::make('name')->label('Nama'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
                 Tables\Columns\TextColumn::make('phone')->label('No HP'),
-                Tables\Columns\TextColumn::make('status')->label('Status')->badge()->color(fn (string $state) => match ($state) {
-                    'Dikirim' => 'gray',
-                    'Diproses' => 'warning',
-                    'Ditolak' => 'danger',
-                    'Diterima' => 'success',
-                }),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->color(fn (string $state) => match ($state) {
+                        'Lamaran Dikirim' => 'gray',
+                        'Lamaran Direview' => 'warning',
+                        'Interview' => 'info',
+                        'Diterima' => 'success',
+                        'Ditolak' => 'danger',
+                        default => 'secondary',
+                    }),
                 Tables\Columns\TextColumn::make('created_at')->label('Dilamar pada')->dateTime('d M Y H:i'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Status Lamaran')
                     ->options([
-                        'Dikirim' => 'Dikirim',
-                        'Diproses' => 'Diproses',
-                        'Ditolak' => 'Ditolak',
+                        'Lamaran Dikirim' => 'Lamaran Dikirim',
+                        'Lamaran Direview' => 'Lamaran Direview',
+                        'Interview' => 'Interview',
                         'Diterima' => 'Diterima',
+                        'Ditolak' => 'Ditolak',
                     ]),
             ])
             ->actions([

@@ -1,96 +1,106 @@
+// === Ambil CSRF Token dari meta tag ===
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
 document.addEventListener('DOMContentLoaded', () => {
-  // === Filter Kategori Lowongan ===
+
+  // === 1. Filter Kategori Lowongan ===
+  const kategoriDropdown = document.getElementById("kategoriDropdown");
   const kategoriLinks = document.querySelectorAll(".dropdown-menu a.dropdown-item");
   const jobCards = document.querySelectorAll(".card[data-kategori]");
-  const kategoriDropdown = document.getElementById("kategoriDropdown");
 
-  function filterKategori(kategori) {
+  const filterKategori = (kategori) => {
     jobCards.forEach(card => {
       const kategoriCard = card.getAttribute("data-kategori");
       card.style.display = (kategori === "Semua" || kategoriCard === kategori) ? "block" : "none";
     });
-    kategoriDropdown.innerHTML = `<i class="bi bi-funnel-fill"></i> ${kategori}`;
-  }
+    if (kategoriDropdown) {
+      kategoriDropdown.innerHTML = `<i class="bi bi-funnel-fill"></i> ${kategori}`;
+    }
+  };
 
   kategoriLinks.forEach(link => {
-    link.addEventListener("click", function (e) {
+    link.addEventListener("click", e => {
       e.preventDefault();
-      filterKategori(this.textContent.trim());
+      filterKategori(link.textContent.trim());
     });
   });
 
-  filterKategori("Semua"); // Tampilkan semua kategori default
+  filterKategori("Semua");
 
-  // === Navbar underline dan shrink saat scroll ===
+  // === 2. Navbar Underline dan Shrink saat Scroll ===
   const navbar = document.querySelector('.navbar');
   const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
   navLinks.forEach(link => {
-    link.addEventListener('click', function () {
+    link.addEventListener('click', () => {
       navLinks.forEach(l => l.classList.remove('underline'));
-      this.classList.add('underline');
+      link.classList.add('underline');
     });
   });
 
   window.addEventListener('scroll', () => {
-    navbar?.classList.toggle('shrink', window.scrollY > 50);
+    if (navbar) navbar.classList.toggle('shrink', window.scrollY > 50);
   });
 
-  // === Link ke Lihat Lowongan (jika digunakan di halaman lain) ===
-  document.getElementById('lihatLowongan')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = 'find-job.html';
+  // === 3. Navigasi ke Halaman Lowongan ===
+  const goToLowongan = () => window.location.href = 'find-job.html';
+  document.getElementById('lihatLowongan')?.addEventListener('click', e => { e.preventDefault(); goToLowongan(); });
+  document.getElementById('footerLowongan')?.addEventListener('click', e => { e.preventDefault(); goToLowongan(); });
+
+  // === 4. Toggle Field "Profesi Lainnya" ===
+  const profesiSelect = document.getElementById('profesiSelect');
+  const profesiLainnyaField = document.getElementById('profesiLainnyaField');
+
+  profesiSelect?.addEventListener('change', () => {
+    const isLainnya = profesiSelect.value === 'Lainnya';
+    profesiLainnyaField?.classList.toggle('d-none', !isLainnya);
+    const input = profesiLainnyaField?.querySelector('input');
+    if (input) {
+      isLainnya ? input.setAttribute('required', 'true') : input.removeAttribute('required');
+    }
   });
 
-  document.getElementById('footerLowongan')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = 'find-job.html';
+  // === 5. Preview Gambar Foto Profil ===
+  const previewImage = document.getElementById('editProfileImage');
+  previewImage?.addEventListener('change', function () {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target.result;
+      document.getElementById('previewProfileImage').src = result;
+      document.getElementById('profilePicture').src = result;
+    };
+    if (this.files[0]) reader.readAsDataURL(this.files[0]);
   });
 
-  // === Modal Lamar: Isi Otomatis Posisi & Job ID ===
-  const lamarButtons = document.querySelectorAll('.btn-lamar');
-  lamarButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const posisi = btn.getAttribute('data-posisi');
-      const jobId = btn.getAttribute('data-job-id');
-
-      document.getElementById('posisiInput').value = posisi;
-      document.getElementById('jobPostingId').value = jobId;
-    });
-  });
-
-  // === Submit Lamaran via fetch() ===
+  // === 6. Submit Lamaran via Fetch ===
   const applyForm = document.getElementById('applyForm');
-  const applyModalEl = document.getElementById('applyModal');
-  const successModalEl = document.getElementById('successModal');
+  const applyModal = document.getElementById('applyModal');
+  const successModal = document.getElementById('successModal');
 
   applyForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const cv = form.cv.files[0];
-    const fol = form.portfolio.files[0];
+    const formData = new FormData(applyForm);
+    const cv = formData.get('cv');
+    const portfolio = formData.get('portfolio');
 
-    // Validasi ukuran file
     if (cv && cv.size > 2 * 1024 * 1024) {
-      alert('CV melebihi 2 MB');
+      alert('Ukuran CV melebihi 2 MB.');
       return;
     }
-    if (fol && fol.size > 5 * 1024 * 1024) {
-      alert('Portofolio melebihi 5 MB');
+    if (portfolio && portfolio.size > 5 * 1024 * 1024) {
+      alert('Ukuran portofolio melebihi 5 MB.');
       return;
     }
-
-    const formData = new FormData(form);
-    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
 
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(applyForm.action, {
         method: 'POST',
         body: formData,
         credentials: 'same-origin',
         headers: {
-          'X-CSRF-TOKEN': csrfToken
+          'X-CSRF-TOKEN': csrfToken,
+          'Accept': 'application/json'
         }
       });
 
@@ -98,43 +108,34 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = isJson ? await response.json() : {};
 
       if (response.ok) {
-        bootstrap.Modal.getInstance(applyModalEl)?.hide();
-        new bootstrap.Modal(successModalEl).show();
-        form.reset();
-      } else if (response.status === 422 && data.errors) {
-        const messages = Object.values(data.errors).flat().join('\n');
-        alert(`Validasi Gagal:\n${messages}`);
+        bootstrap.Modal.getInstance(applyModal)?.hide();
+        const successInstance = new bootstrap.Modal(successModal);
+        successInstance.show();
+        applyForm.reset();
       } else if (response.status === 401) {
         alert('Anda harus login terlebih dahulu.');
+      } else if (response.status === 422 && data.errors) {
+        const messages = Object.values(data.errors).flat().join('\n');
+        alert(`Validasi gagal:\n${messages}`);
       } else {
-        alert(data.message || 'Terjadi kesalahan. Silakan coba lagi.');
+        alert(data.message || 'Terjadi kesalahan saat mengirim lamaran.');
       }
+
     } catch (err) {
-      console.error('Gagal mengirim lamaran:', err);
-      alert('Terjadi kesalahan saat mengirim lamaran. Coba lagi nanti.');
+      console.error('Gagal kirim lamaran:', err);
+      alert('Gagal mengirim lamaran. Silakan coba lagi nanti.');
     }
   });
 
-  // === Toggle Field "Profesi Lainnya" ===
-  const profesiSelect = document.getElementById('profesiSelect');
-  const profesiLainnyaField = document.getElementById('profesiLainnyaField');
-
-  profesiSelect?.addEventListener('change', () => {
-    const isOther = profesiSelect.value === 'Lainnya';
-    profesiLainnyaField?.classList.toggle('d-none', !isOther);
-    const input = profesiLainnyaField?.querySelector('input');
-    if (input) {
-      isOther ? input.setAttribute('required', 'true') : input.removeAttribute('required');
+  // === 7. Auto Isi "Posisi yang Dilamar" (Versi yang Benar) ===
+  const applyModalElement = document.getElementById('applyModal');
+  applyModalElement?.addEventListener('show.bs.modal', function (event) {
+    const button = event.relatedTarget;
+    const posisi = button?.getAttribute('data-posisi');
+    const posisiInput = document.getElementById('posisiInput');
+    if (posisi && posisiInput) {
+      posisiInput.value = posisi;
     }
   });
 
-  // === Preview Foto Profil ===
-  document.getElementById('editProfileImage')?.addEventListener('change', function () {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      document.getElementById('previewProfileImage').src = e.target.result;
-      document.getElementById('profilePicture').src = e.target.result;
-    };
-    if (this.files[0]) reader.readAsDataURL(this.files[0]);
-  });
 });

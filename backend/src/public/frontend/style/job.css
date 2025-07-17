@@ -261,6 +261,16 @@ a:focus-visible {
   font-size: 1rem;
 }
 
+.job-title-pink {
+  background-color: pink;
+  color: white;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 30px;
+  display: inline-block;
+}
+
+
 .apply-btn {
   background-color: var(--pink-accent) !important;
   color: var(--white) !important;

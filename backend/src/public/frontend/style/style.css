@@ -95,12 +95,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Style tambahan untuk tombol di navbar */
 .navbar-nav .nav-link {
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-weight: 600;
   color: #333 !important;
-  text-transform: uppercase; /* Membuat huruf jadi kapital */
-  letter-spacing: 1px; /* Memberikan jarak antar huruf */
-  padding: 10px 20px; /* Ukuran padding yang lebih besar */
+  padding: 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   position: relative;
+  font-size: 1rem;
   transition: color 0.3s ease;
 }
 
