@@ -33,9 +33,11 @@
             <li class="nav-item">
           <a class="nav-link {{ request()->routeIs('jobs.index') ? 'active' : '' }}" href="{{ route('jobs.index') }}">Lihat Lowongan</a>
           </li>
+          @auth
           <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('application.status') ? 'active' : '' }}" href="{{ route('application.status') }}">Aktivitas Saya</a>
           </li>
+          @endauth
         </ul>
       @guest
       <div id="authMenu" class="d-flex gap-2">

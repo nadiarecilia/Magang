@@ -69,7 +69,22 @@ class ApplicationResource extends Resource
                     'Diterima' => 'Diterima',
                     'Ditolak' => 'Ditolak',
                 ])
-                ->required(),
+                ->required()
+                ->reactive(),
+            Forms\Components\TextInput::make('virtual_interview_link')
+                ->label('Link Interview (Zoom/GMeet)')
+                ->helperText('Akan dikirim via email jika status Interview')
+                ->visible(fn ($get) => $get('status') === 'Interview')
+                ->dehydrated(false) 
+                ->reactive(),
+
+            Forms\Components\DateTimePicker::make('virtual_interview_schedule')
+                ->label('Jadwal Interview')
+                ->helperText('Akan dikirim via email jika status Interview')
+                ->visible(fn ($get) => $get('status') === 'Interview')
+                ->dehydrated(false) 
+                ->reactive(),
+
         ]);
     }
 

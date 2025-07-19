@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('Winnicode Garuda Teknologi')
             ->spa()
             ->login()
             ->passwordReset()
