@@ -6,13 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // === 1. Filter Kategori Lowongan ===
   const kategoriDropdown = document.getElementById("kategoriDropdown");
   const kategoriLinks = document.querySelectorAll(".dropdown-menu a.dropdown-item");
-  const jobCards = document.querySelectorAll(".card[data-kategori]");
+  const jobCols = document.querySelectorAll(".job-section .col-md-6, .job-section .col-lg-4");
 
   const filterKategori = (kategori) => {
-    jobCards.forEach(card => {
-      const kategoriCard = card.getAttribute("data-kategori");
-      card.style.display = (kategori === "Semua" || kategoriCard === kategori) ? "block" : "none";
+    jobCols.forEach(col => {
+      const card = col.querySelector(".card[data-kategori]");
+      const kategoriCard = card?.getAttribute("data-kategori");
+
+      if (kategori === "Semua" || kategoriCard === kategori) {
+        col.classList.remove("d-none");
+      } else {
+        col.classList.add("d-none");
+      }
     });
+
     if (kategoriDropdown) {
       kategoriDropdown.innerHTML = `<i class="bi bi-funnel-fill"></i> ${kategori}`;
     }
@@ -138,4 +145,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // === 8. ScrollSpy Aktif untuk Navbar ===
+  const sectionObserver = () => {
+  const sections = document.querySelectorAll("section[id]");
+  const navLinks = document.querySelectorAll(".nav-link[data-scroll]");
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.6
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute("id");
+      const link = document.querySelector(`.nav-link[data-scroll="${id}"]`);
+      if (link && entry.isIntersecting) {
+        document.querySelectorAll('.nav-link[data-scroll]').forEach(el => el.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(section => observer.observe(section));
+
+  // Tambahan: langsung aktifkan saat klik
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navLinks.forEach(el => el.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+};
+
+sectionObserver();
 });

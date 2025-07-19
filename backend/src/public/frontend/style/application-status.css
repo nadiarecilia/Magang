@@ -66,19 +66,19 @@ h3.fw-bold {
 
 /* Tombol Riwayat Aktivitas */
 .bg-white .btn-outline-primary {
-  font-size: 1rem;                   /* Ukuran font tombol */
-  padding: 0.75rem 1.5rem;           /* Padding tombol lebih besar */
-  border-radius: 30px;               /* Membuat sudut tombol membulat */
-  font-weight: 600;                   /* Menebalkan font tombol */
-  color: var(--primary-blue);         /* Warna teks tombol biru */
-  border-color: var(--primary-blue); /* Border tombol biru */
+  font-size: 1rem;                   
+  padding: 0.75rem 1.5rem;           
+  border-radius: 30px;               
+  font-weight: 600;                   
+  color: var(--primary-blue);         
+  border-color: var(--primary-blue); 
 }
 
 /* Tombol Riwayat Aktivitas Hover */
 .bg-white .btn-outline-primary:hover {
-  background-color: var(--primary-blue); /* Ubah latar belakang menjadi biru saat hover */
-  color: #fff;                           /* Ubah teks menjadi putih saat hover */
-  border-color: var(--primary-blue);     /* Sesuaikan border dengan warna latar belakang */
+  background-color: var(--primary-blue);
+  color: #fff;                           
+  border-color: var(--primary-blue);     
 }
 
 /* Modal */
@@ -284,4 +284,21 @@ h3.fw-bold {
   .activity-grid {
     grid-template-columns: repeat(2, 1fr); /* 2 kolom per baris */
   }
+}
+
+.navbar {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+}
+
+body, html {
+  border-radius: 0 !important;
+  overflow-x: hidden;
+}
+
+.container,
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

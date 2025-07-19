@@ -80,3 +80,4 @@
   </div>
 </section>
 @endsection
+@include('frontend.authmodal')

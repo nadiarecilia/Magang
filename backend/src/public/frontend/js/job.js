@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Data aplikasi
   const applications = [
     {
       title: 'Web Developer',

@@ -12,6 +12,10 @@ class ApplicationLogController extends Controller
     {
         $user = Auth::user();
 
+        if (!$user) {
+            return redirect()->route('application.status', ['auth' => 'login']);
+            }
+
         $applications = Application::with(['jobPosting', 'logs'])
             ->where('user_id', $user->id)
             ->latest()

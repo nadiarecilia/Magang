@@ -11,6 +11,11 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function showLoginForm()
+{
+    return view('frontend.home'); 
+}
+
     public function register(Request $request)
 {
     $request->validate([

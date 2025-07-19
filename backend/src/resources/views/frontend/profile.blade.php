@@ -186,8 +186,8 @@
       @csrf
       @method('PUT')
 
-      <div class="modal-header">
-        <h5 class="modal-title">Edit Profil</h5>
+      <div class="modal-header" style="background-color: #eb44bb;">
+        <h5 class="modal-title text-white">Edit Profil</h5>
         <button class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 

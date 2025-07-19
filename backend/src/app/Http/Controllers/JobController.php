@@ -43,7 +43,7 @@ class JobController extends Controller
     $portfolioPath = $request->file('portfolio')->store('applications/portfolio', 'public');
 
     $application = Application::create([
-        'user_id' => Auth::id(), // atau null jika belum login
+        'user_id' => Auth::id(), 
         'job_posting_id' => $jobPosting->id,
         'name' => $request->nama,
         'email' => $request->email,
@@ -59,7 +59,6 @@ class JobController extends Controller
         'portfolio_file' => $portfolioPath,
     ]);
 
-    // Buat log awal
     ApplicationLog::create([
         'application_id' => $application->id,
         'user_id' => Auth::id(),

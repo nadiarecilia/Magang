@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         if (!$user) {
-            return redirect('/')->withErrors(['message' => 'User tidak ditemukan.']);
+            return redirect()->route('login.form');
         }
 
         $profile = $user->pelamarProfile;

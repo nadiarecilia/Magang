@@ -9,17 +9,21 @@
     </button>
     <ul class="dropdown-menu shadow rounded-4 p-2" aria-labelledby="kategoriDropdown">
       <li><h6 class="dropdown-header">Kategori</h6></li>
-      <li><a class="dropdown-item" href="#">Semua</a></li>
+      <li><a class="dropdown-item" href="#" data-kategori="Semua">Semua</a></li>
       @foreach ($categories as $category)
-        <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
-      @endforeach
-    </ul>
+        <li>
+          <a class="dropdown-item" href="#" data-kategori="{{ $category->category_name }}">
+            {{ $category->category_name }}
+          </a>
+        </li>
+    @endforeach
+  </ul>
   </div>
 
   <div class="row g-4 job-section justify-content-center">
     @foreach ($jobs as $job)
       <div class="col-md-6 col-lg-4">
-        <div class="card h-100 shadow-sm bg-white" data-kategori="{{ $job->category->name }}">
+        <div class="card h-100 shadow-sm bg-white" data-kategori="{{ $job->category->category_name }}">
           <div class="card-body">
             <h5 class="card-title text-purple d-flex align-items-center gap-2">
               <img src="{{ asset('frontend/assets/logo1.png') }}" alt="Logo" style="height: 24px;">
@@ -48,15 +52,15 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-              <p><strong>Deskripsi Pekerjaan:</strong></p>
+              <h6 class="fw-bold text-purple">Deskripsi Pekerjaan</h6>
               <div>{!! $job->description !!}</div>
 
-              <p class="mt-3"><strong>Persyaratan:</strong></p>
+              <h6 class="fw-bold text-purple mt-4">Persyaratan</h6>
               <div>{!! $job->requirement !!}</div>
 
               @php
                 $skills = $job->skills ?? '';
-                $skillBadges = collect(explode(',', $skills))->map(fn($s) => '<span class="badge bg-secondary">'.trim($s).'</span>')->implode(' ');
+                $skillBadges = collect(explode(',', $skills))->map(fn($s) => '<span class="badge bg-primary">'.trim($s).'</span>')->implode(' ');
               @endphp
 
               @if ($skillBadges)

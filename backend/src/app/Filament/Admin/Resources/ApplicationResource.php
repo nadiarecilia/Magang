@@ -81,6 +81,19 @@ class ApplicationResource extends Resource
                 Tables\Columns\TextColumn::make('jobPosting.title')->label('Lowongan')->searchable(),
                 Tables\Columns\TextColumn::make('name')->label('Nama'),
                 Tables\Columns\TextColumn::make('email')->label('Email'),
+                Tables\Columns\TextColumn::make('cv_file')
+                    ->label('CV')
+                    ->url(fn ($record) => asset('storage/' . $record->cv_file))
+                    ->openUrlInNewTab()
+                    ->formatStateUsing(fn () => 'Lihat CV')
+                    ->color('primary'),
+
+                Tables\Columns\TextColumn::make('portfolio_file')
+                    ->label('Portofolio')
+                    ->url(fn ($record) => asset('storage/' . $record->portfolio_file))
+                    ->openUrlInNewTab()
+                    ->formatStateUsing(fn () => 'Lihat File')
+                    ->color('success'),
                 Tables\Columns\TextColumn::make('phone')->label('No HP'),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')

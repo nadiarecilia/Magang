@@ -301,26 +301,30 @@ a:focus-visible {
   color: var(--white);
 }
 
-/* Judul bagian seperti "Deskripsi Pekerjaan", "Persyaratan", dan "Skill" tetap ungu */
-.modal-body h6,
-.modal-body strong {
-  font-size: 1.5rem !important;  /* Ukuran font lebih besar seperti judul lainnya */
+/* Hanya untuk heading seperti "Deskripsi Pekerjaan", tetap ungu */
+.modal-body h6 {
+  font-size: 1.2rem !important;
   font-weight: 700 !important;
-  color: var(--purple-text);
-  font-weight: 600;
-  margin-bottom: 10px;
+  color: var(--purple-text) !important;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Isi paragraf dan list jadi warna hitam normal */
+/* Paragraf dan list tetap warna hitam */
 .modal-body p,
-.modal-body ul,
 .modal-body li {
-  color: var(--gray-text);
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 15px;
+  font-weight: 600 !important;
+  font-size: 1.05rem;
+  color: var(--gray-text) !important;
 }
 
+/* Perbaikan tambahan untuk isi <strong> agar tidak ikut ungu */
+.modal-body p strong,
+.modal-body li strong,
+.modal-body div strong {
+  color: var(--gray-text) !important;
+  font-weight: 700;
+}
 
 .modal-body .d-flex {
   background-color: transparent;

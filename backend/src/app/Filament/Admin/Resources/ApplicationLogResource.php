@@ -69,6 +69,17 @@ class ApplicationLogResource extends Resource
             ->filters([
                 //
             ])
+            ->filters([
+                Tables\Filters\SelectFilter::make('status')
+                    ->label('Status Lamaran')
+                    ->options([
+                        'Lamaran Dikirim' => 'Lamaran Dikirim',
+                        'Lamaran Direview' => 'Lamaran Direview',
+                        'Interview' => 'Interview',
+                        'Diterima' => 'Diterima',
+                        'Ditolak' => 'Ditolak',
+                    ]),
+            ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
