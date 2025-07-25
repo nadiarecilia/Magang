@@ -39,7 +39,7 @@ class AcceptanceNotificationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.accepted',
+            view: 'emails.acceptance',
             with: [
                 'applicant' => $this->application,
             ]

@@ -45,9 +45,6 @@
     <p>Tim kami akan segera menghubungi Anda untuk proses onboarding selanjutnya. Pastikan kontak Anda tetap aktif dan periksa email Anda secara berkala.</p>
 
     <p>Terima kasih telah mengikuti proses seleksi di perusahaan kami.</p>
-
-    <a href="https://www.winnicode.com" class="btn" target="_blank">Kunjungi Situs Kami</a>
-
     <p class="footer">Jika Anda memiliki pertanyaan, silakan hubungi HRD kami melalui email ini.</p>
   </div>
 </body>
