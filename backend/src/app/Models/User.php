@@ -76,7 +76,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
 
     public function jobPostings()
     {
-        return $this->hasMany(JobPosting::class, 'rekruter_id');
+        return $this->hasMany(JobPosting::class, 'user_id');
     }
 
     public function applications()

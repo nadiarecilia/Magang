@@ -25,19 +25,13 @@ class JobPostingResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Informasi Rekruter & Kategori')
+                Forms\Components\Hidden::make('user_id')
+                ->default(fn () => auth()->id()),
+                
+                Forms\Components\Section::make('Informasi superadmin & Kategori')
                     ->schema([
                         Forms\Components\Grid::make(2)
                             ->schema([
-                                Forms\Components\Select::make('user_id')
-                                    ->relationship(
-                                        name: 'user',
-                                        titleAttribute: 'name',
-                                        modifyQueryUsing: fn ($query) => $query->whereHas('roles', fn ($q) => $q->where('name', 'Rekruter'))
-                                    )
-                                    ->label('Nama Rekruter')
-                                    ->required(),
-
                                 Forms\Components\Select::make('category_id')
                                     ->relationship('category', 'category_name')
                                     ->label('Kategori')
@@ -147,11 +141,6 @@ class JobPostingResource extends Resource
                     ->label('Judul')
                     ->searchable()
                     ->sortable(),
-
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Rekruter')
-                    ->sortable()
-                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('category.category_name')
                     ->label('Kategori')
