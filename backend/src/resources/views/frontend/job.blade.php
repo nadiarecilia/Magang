@@ -113,19 +113,23 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">Nama Lengkap *</label>
-            <input name="nama" class="form-control" required>
+            <input name="nama" class="form-control" required
+            value="{{ old('nama', $profile?->first_name . ' ' . $profile?->last_name ?? $user?->name) }}">
           </div>
           <div class="col-md-6">
             <label class="form-label">Email Aktif *</label>
-            <input type="email" name="email" class="form-control" required>
+            <input type="email" name="email" class="form-control" required
+            value="{{ old('email', $user?->email) }}">
           </div>
           <div class="col-md-6">
             <label class="form-label">No. HP / WhatsApp *</label>
-            <input name="telepon" class="form-control" required>
+            <input name="telepon" class="form-control" required
+            value="{{ old('telepon', $profile?->phone ?? '') }}">
           </div>
           <div class="col-md-6">
             <label class="form-label">Domisili *</label>
-            <input name="domisili" class="form-control" required>
+            <input name="domisili" class="form-control" required
+              value="{{ old('domisili', $profile?->address ?? '') }}">
           </div>
         </div>
 
@@ -159,9 +163,12 @@
           <div class="col-md-6">
             <label class="form-label">Pendidikan Terakhir *</label>
             <select name="pendidikan" class="form-select" required>
-              <option value="" selected disabled>Pilih</option>
-              <option>SMA/SMK</option><option>D3</option><option>S1</option><option>S2</option>
-            </select>
+            <option value="" disabled {{ old('pendidikan', $profile?->education_level) ? '' : 'selected' }}>Pilih</option>
+            <option value="SMA/SMK" {{ old('pendidikan', $profile?->education_level) == 'SMA/SMK' ? 'selected' : '' }}>SMA/SMK</option>
+            <option value="D3" {{ old('pendidikan', $profile?->education_level) == 'D3' ? 'selected' : '' }}>D3</option>
+            <option value="S1" {{ old('pendidikan', $profile?->education_level) == 'S1' ? 'selected' : '' }}>S1</option>
+            <option value="S2" {{ old('pendidikan', $profile?->education_level) == 'S2' ? 'selected' : '' }}>S2</option>
+          </select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Pengalaman kerja dalam posisi ini *</label>
@@ -230,7 +237,5 @@
     </div>
   </div>
 </div>
-
-
 </div>
 @endsection

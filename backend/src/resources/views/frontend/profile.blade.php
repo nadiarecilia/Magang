@@ -98,75 +98,12 @@
                     </div>
                 </div>
             </div>
-
-            <h5 class="section-head">Ringkasan Profesional</h5>
-            <p class="preline mb-4">{{ Auth::user()->pelamarProfile->summary ?? '-' }}</p>
-
-            <h5 class="section-head">Riwayat Pekerjaan</h5>
-            <p class="preline mb-4">{{ Auth::user()->pelamarProfile->work_experience ?? '-' }}</p>
-
-            <h5 class="section-head">Pendidikan</h5>
-            <p class="preline mb-4">{{ Auth::user()->pelamarProfile->achievements ?? '-' }}</p>
-
-            <h5 class="section-head">Detail Prestasi</h5>
-            <p class="preline mb-4">{{ Auth::user()->pelamarProfile->achievements ?? '-' }}</p>
-
-            <h5 class="section-head">Sertifikasi</h5>
-            <p class="preline mb-5">{{ Auth::user()->pelamarProfile->certifications ?? '-' }}</p>
-
             @php
     // helper cepat: ubah CSV -> array rapi
     $split = fn ($csv) => array_filter(array_map('trim', explode(',', $csv ?? '')));
 @endphp
 
 <div class="row">
-    {{-- SOFTWARE --}}
-    <div class="col-md-4 mb-4">
-        <h6 class="fw-bold text-primary">Software</h6>
-        @php $tags = $split(Auth::user()->pelamarProfile->skills); @endphp
-        @if ($tags)
-            <div class="d-flex flex-wrap gap-2">
-                @foreach ($tags as $tag)
-                    <span class="badge bg-secondary">{{ $tag }}</span>
-                @endforeach
-            </div>
-        @else
-            <span class="text-muted">-</span>
-        @endif
-    </div>
-
-    {{-- BAHASA --}}
-    <div class="col-md-4 mb-4">
-        <h6 class="fw-bold text-primary">Bahasa</h6>
-        @php $tags = $split(Auth::user()->pelamarProfile->languages); @endphp
-        @if ($tags)
-            <div class="d-flex flex-wrap gap-2">
-                @foreach ($tags as $tag)
-                    <span class="badge bg-secondary">{{ $tag }}</span>
-                @endforeach
-            </div>
-        @else
-            <span class="text-muted">-</span>
-        @endif
-    </div>
-
-    {{-- MINAT --}}
-    <div class="col-md-4 mb-4">
-        <h6 class="fw-bold text-primary">Minat</h6>
-        @php $tags = $split(Auth::user()->pelamarProfile->interests); @endphp
-        @if ($tags)
-            <div class="d-flex flex-wrap gap-2">
-                @foreach ($tags as $tag)
-                    <span class="badge bg-secondary">{{ $tag }}</span>
-                @endforeach
-            </div>
-        @else
-            <span class="text-muted">-</span>
-        @endif
-    </div>
-</div>
-
-
             <div class="text-end">
                 <button class="btn btn-outline-primary mt-3" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                     <i class="bi bi-pencil-square me-1"></i> Edit Profil
@@ -308,71 +245,6 @@
                       class="form-control autogrow">{{ old('address', Auth::user()->pelamarProfile->address ?? '') }}</textarea>
           </div>
         </div>
-
-        <!-- RINGKASAN & LAINNYA -->
-        <div class="mb-3">
-          <label class="form-label">Ringkasan Profesional</label>
-          <textarea id="editSummary"
-                    name="summary"
-                    rows="4"
-                    class="form-control autogrow">{{ old('summary', Auth::user()->pelamarProfile->summary ?? '') }}</textarea>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Riwayat Pekerjaan</label>
-          <textarea id="editJobHistory"
-                    name="work_experience"
-                    rows="4"
-                    class="form-control autogrow">{{ old('work_experience', Auth::user()->pelamarProfile->work_experience ?? '') }}</textarea>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Detail Pendidikan</label>
-          <textarea id="editEducationDetail"
-                    name="education_detail"
-                    rows="3"
-                    class="form-control autogrow">{{ old('education_detail', Auth::user()->pelamarProfile->education_detail ?? '') }}</textarea>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Detail Prestasi</label>
-          <textarea id="editAchievements"
-                    name="achievements"
-                    rows="3"
-                    class="form-control autogrow">{{ old('achievements', Auth::user()->pelamarProfile->achievements ?? '') }}</textarea>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Sertifikasi</label>
-          <textarea id="editCertificatesDesc"
-                    name="certifications"
-                    rows="3"
-                    class="form-control autogrow">{{ old('certifications', Auth::user()->pelamarProfile->certifications ?? '') }}</textarea>
-        </div>
-
-        <!-- TAGS -->
-        <div class="row g-3">
-    <div class="col-md-4">
-        <label class="form-label">Software (pisah koma)</label>
-        <input name="skills"
-               class="form-control"
-               value="{{ old('skills', Auth::user()->pelamarProfile->skills ?? '') }}">
-    </div>
-
-    <div class="col-md-4">
-        <label class="form-label">Bahasa (pisah koma)</label>
-        <input name="languages"
-               class="form-control"
-               value="{{ old('languages', Auth::user()->pelamarProfile->languages ?? '') }}">
-    </div>
-
-    <div class="col-md-4">
-        <label class="form-label">Minat (pisah koma)</label>
-        <input name="interests"
-               class="form-control"
-               value="{{ old('interests', Auth::user()->pelamarProfile->interests ?? '') }}">
-    </div>
-</div>
 
       <div class="modal-footer">
         <button class="btn btn-primary" type="submit">Simpan Perubahan</button>

@@ -37,6 +37,15 @@ class PelamarProfileResource extends Resource
                                 ->label('Nama Akun')
                                 ->required(),
 
+                                Forms\Components\Select::make('user_id')
+                                ->relationship(
+                                    name: 'user',
+                                    titleAttribute: 'email',
+                                    modifyQueryUsing: fn ($query) => $query->where('role', 'pelamar')
+                                )
+                                ->label('Email')
+                                ->required(),
+
                             Forms\Components\FileUpload::make('profile_picture')
                                 ->label('Foto Profil')
                                 ->directory('profile-pictures')
@@ -84,31 +93,12 @@ class PelamarProfileResource extends Resource
                                 ])
                                 ->label('Tingkat Pendidikan'),
 
-                            Forms\Components\TextInput::make('major')  // Menambahkan kolom major
+                            Forms\Components\TextInput::make('major')  
                                 ->label('Jurusan')
                                 ->placeholder('Masukkan Jurusan Anda')
-                                ->required()  // Jika perlu wajib diisi
+                                ->required()  
                                 ->maxLength(255),
-
-                            Forms\Components\Textarea::make('skills')
-                                ->label('Keahlian')
-                                ->rows(2),
-
-                            Forms\Components\Textarea::make('languages')
-                                ->label('Bahasa')
-                                ->rows(2),
                         ]),
-                    ])
-                    ->columns(1)
-                    ->collapsible(),
-
-                Section::make('Lainnya')
-                    ->schema([
-                        Forms\Components\Textarea::make('summary')->label('Ringkasan Diri')->rows(3),
-                        Forms\Components\Textarea::make('work_experience')->label('Pengalaman Kerja')->rows(3),
-                        Forms\Components\Textarea::make('achievements')->label('Prestasi')->rows(3),
-                        Forms\Components\Textarea::make('certifications')->label('Sertifikasi')->rows(3),
-                        Forms\Components\Textarea::make('interests')->label('Minat')->rows(3),
                     ])
                     ->columns(1)
                     ->collapsible(),
@@ -126,6 +116,11 @@ class PelamarProfileResource extends Resource
 
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('Nama Akun')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Email')
                     ->searchable()
                     ->sortable(),
 

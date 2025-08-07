@@ -21,13 +21,6 @@ class PelamarProfile extends Model
         'id_number',
         'address',
         'education_level',
-        'summary',
-        'work_experience',
-        'achievements',
-        'certifications',
-        'skills',
-        'languages',
-        'interests',
         'major',
     ];
 

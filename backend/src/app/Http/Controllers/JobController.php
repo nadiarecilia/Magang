@@ -15,8 +15,11 @@ class JobController extends Controller
     public function index()
     {
         $jobs = JobPosting::with('category', 'user')->where('status', 'Aktif')->get();
-        $categories = JobCategory::all();
-        return view('frontend.job', compact('jobs', 'categories'));
+        $categories = JobCategory::all(); 
+        $user = auth()->user();
+        $profile = $user?->pelamarProfile;
+        
+        return view('frontend.job', compact('jobs', 'categories', 'user', 'profile'));
     }
 
      public function submitFromModal(Request $request)
